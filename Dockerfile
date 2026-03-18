@@ -8,7 +8,7 @@ WORKDIR /app
 # → exploite le cache Docker : si package.json n'a pas changé,
 #   cette couche n'est pas reconstruite
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm install --omit=dev
 
 # ─────────────────────────────────────────
 # Stage 2 : Runtime (image finale légère)
