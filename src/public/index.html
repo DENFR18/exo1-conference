@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Demo App - Exo 1 Conférence IA</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header {
+      background: #161b22;
+      width: 100%;
+      padding: 16px 40px;
+      border-bottom: 1px solid #30363d;
+      position: fixed;
+      top: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header .badge {
+      background: #f0a500;
+      color: #0d1117;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    header h1 { font-size: 16px; color: #e6edf3; }
+
+    main {
+      text-align: center;
+      padding: 120px 20px 60px;
+      max-width: 800px;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #58a6ff, #a371f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: #8b949e;
+      margin-bottom: 48px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: left;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: #58a6ff; }
+
+    .card .icon { font-size: 28px; margin-bottom: 12px; }
+    .card h3 { font-size: 15px; margin-bottom: 8px; color: #e6edf3; }
+    .card p { font-size: 13px; color: #8b949e; line-height: 1.5; }
+
+    .status-bar {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #3fb950;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    #info-text { color: #8b949e; }
+    #env-value { color: #58a6ff; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="badge">Expérimenter</span>
+    <h1>Génération IA — Code + Dockerfile + CI/CD</h1>
+  </header>
+
+  <main>
+    <h2 class="hero-title">Node.js + Docker<br/>+ GitHub Actions</h2>
+    <p class="hero-subtitle">Généré avec l'IA — Exo 1 Conférence</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Express.js</h3>
+        <p>Serveur web léger avec routes REST et service de fichiers statiques.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🐳</div>
+        <h3>Dockerfile Multi-stage</h3>
+        <p>Image optimisée avec build séparé du runtime, user non-root, alpine.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔄</div>
+        <h3>Pipeline CI/CD</h3>
+        <p>Build → Tests → Scan Trivy → Push Docker Hub sur chaque push.</p>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="dot"></div>
+      <span id="info-text">Chargement des infos...</span>
+    </div>
+  </main>
+
+  <script>
+    fetch('/api/info')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('info-text').innerHTML =
+          `App : <strong>${data.app}</strong> &nbsp;|&nbsp; Env : <span id="env-value">${data.environment}</span> &nbsp;|&nbsp; Conteneurisé : <strong>${data.containerized ? 'Oui ✅' : 'Non'}</strong>`;
+      })
+      .catch(() => {
+        document.getElementById('info-text').textContent = 'Serveur en ligne.';
+      });
+  </script>
+</body>
+</html>

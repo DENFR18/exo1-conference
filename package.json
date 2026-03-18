@@ -1,0 +1,18 @@
+{
+  "name": "demo-web-app",
+  "version": "1.0.0",
+  "description": "Page web demo - Exo 1 Conférence IA",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  }
+}
