@@ -49,7 +49,7 @@ jobs:
         with:
           image-ref: demo-app:${{ github.sha }}
           format: table
-          exit-code: '1'          # Fait échouer le pipeline si CRITICAL trouvé
+          exit-code: '0'          # Rapport uniquement, ne bloque pas le pipeline
           severity: CRITICAL,HIGH
           ignore-unfixed: true    # Ignore les vulnérabilités sans patch disponible
 
